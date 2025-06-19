@@ -10,9 +10,18 @@ import requests
 import json 
 from tkinter import *
 import math
+from newsapi import NewsApiClient
+
 
 city_name = "Joppatowne,US"
-API_KEY = '574b03336b1071c7870836b63fc13435'
+weather_API_key = '574b03336b1071c7870836b63fc13435'
+news_API_key = '510c4c9c505148a9819f6fa6cafe2c19'
+newsClient = NewsApiClient(news_API_key)
+
+def main(api):
+    print("Hello! Hope You are Having a Great Day!")
+    news = api.get_top_headlines(sources='bbc-news')
+    print(news)
 
 def get_weather(API_KEY, city):
     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}"
@@ -32,6 +41,10 @@ def get_weather(API_KEY, city):
         'humidity': humidity
     }
 
+def gte_news():
+    pass
 
-weather = get_weather(API_KEY, city_name)    
-print(weather)
+weather = get_weather(weather_API_key, city_name)    
+#print(weather)
+ 
+main(newsClient)
